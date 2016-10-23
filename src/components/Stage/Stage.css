@@ -1,0 +1,27 @@
+.stage {
+    position: absolute;
+    background-color: rgba(0, 0, 0, .6);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+img#selectedPhoto {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+span.closeStage {
+   width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 25px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    z-index: 3;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+}
