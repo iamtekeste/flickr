@@ -23,7 +23,7 @@ class App extends Component {
   }
   getPhotosFromFlickr() {
     let userId = Utils.userId;
-    let photosURL = `${Utils.baseURL}&user_id=${userId}&method=flickr.photos.search&text=${this.state.searchText}&per_page=20&sort=${this.state.sort}`;
+    let photosURL = `${Utils.baseURL}&user_id=${userId}&method=flickr.photos.search&text=${this.state.searchText}&per_page=25&sort=${this.state.sort}`;
 
     fetch(photosURL)
         .then(response => {
