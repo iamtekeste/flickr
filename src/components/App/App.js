@@ -14,6 +14,7 @@ class App extends Component {
     this.handlePagination = this.handlePagination.bind(this);
     this.state = {
       currentPage: 1,
+      pages: 0,
       searchText: '',
       sort: 'date-posted-desc',
       photos: []
@@ -25,39 +26,46 @@ class App extends Component {
   }
   getPhotosFromFlickr() {
     let userId = Utils.userId;
-    let photosURL = `${Utils.baseURL}&user_id=${userId}&method=flickr.photos.search&text=${this.state.searchText}&per_page=25&sort=${this.state.sort}`;
-
+    let photosURL = `${Utils.baseURL}&user_id=${userId}&method=flickr.photos.search&text=${this.state.searchText}&page=${this.state.currentPage}&per_page=25&sort=${this.state.sort}`;
+    console.log(photosURL)
     fetch(photosURL)
         .then(response => {
           return response.json();
         })
         .then(jsonResponse => {
-            let photos = jsonResponse.photos
-            this.setState({photos: photos.photo, currentPage: photos.page});
+            let photos = jsonResponse.photos;
+            this.setState({
+              photos: photos.photo, 
+              currentPage: photos.page, 
+              pages: photos.pages
+            });
         });
   }
   handleSearch(searchText) {
-    this.setState({searchText: searchText});
-    this.getPhotosFromFlickr();
+    this.setState({searchText: searchText, currentPage:1},() => {
+      this.getPhotosFromFlickr();
+    });
+    
   }
   handleSort(sort) {
-    this.setState({sort: sort});
-    this.getPhotosFromFlickr();
-  }
-  handlePagination(currentPage) {
-    this.setState({
-      currentPage:currentPage
+    this.setState({sort: sort}, () => {
+      this.getPhotosFromFlickr();
     });
-   this.getPhotosFromFlickr();
+  }
+  handlePagination(changeBy) {
+    let currentPage = this.state.currentPage + changeBy > 1 ? this.state.currentPage + changeBy : 1;
+    this.setState({
+      currentPage: currentPage
+    },() => {
+       this.getPhotosFromFlickr();
+    });
   }
   render() {
-    if(this.state.photos.length === 0)
-      return (
-        <div className="App">
-          <Search handleSearch={this.handleSearch}/>
-          <h1> Oops! please try again.</h1>
-      </div>
-      );
+    let paginationData = {
+      pages: this.state.pages,
+      currentPage: this.state.currentPage
+    }
+
     return (
       <div className="App">
         <div className="App-header">
@@ -66,7 +74,7 @@ class App extends Component {
         <div className="content">
           <div className="paginate-sort">
             <Sort handleSort={this.handleSort}/>
-            <Paginate handlePagination={this.handlePagination} />
+            <Paginate handlePagination={this.handlePagination} paginationData={paginationData}/>
           </div>
           <Gallery photos={this.state.photos} />
         </div>

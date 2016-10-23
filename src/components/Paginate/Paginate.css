@@ -10,10 +10,19 @@ button {
     background: #222;
     color: #fff;
     border: 0px;
-    cursor: pointer
+    cursor: pointer;
+    font-size: 16px;
+}
+button:disabled {
+    background: #e0e0e0;
+    color: #000;
+    cursor: not-allowed;
 }
 button:focus {
     outline: none;
+}
+button.next {
+    margin-right: 0;
 }
 @media all and (max-width: 500px) {
     .paginations{

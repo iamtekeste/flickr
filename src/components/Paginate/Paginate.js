@@ -3,17 +3,26 @@ import './Paginate.css';
 class Paginate extends Component {
     constructor() {
         super();
-        this.handleSort = this.handleSort.bind(this);
+        this.handlePagination = this.handlePagination.bind(this);
+        this.state = {
+            nextDisabled: false,
+            previousDisabled: false
+        }
     }
-    handleSort() {
-        this.props.handleSort(this.refs.sort.value);
+    componentDidMount() {
+        //check here if we need to disable the buttons
+        
+    }
+    handlePagination(event) {
+        let changeBy = +event.target.value;
+        this.props.handlePagination(changeBy);
     }
 
     render() {
         return (
             <div className="paginations">
-                <button className="previous">Previous</button>
-                <button className="next">Next</button>
+                <button className="previous" onClick={this.handlePagination} value="-1">Previous</button>
+                <button className="next" onClick={this.handlePagination} value="1">Next</button>
             </div>
         );
     }
