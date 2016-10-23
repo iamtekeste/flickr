@@ -27,7 +27,6 @@ class App extends Component {
   getPhotosFromFlickr() {
     let userId = Utils.userId;
     let photosURL = `${Utils.baseURL}&user_id=${userId}&method=flickr.photos.search&text=${this.state.searchText}&page=${this.state.currentPage}&per_page=25&sort=${this.state.sort}`;
-    console.log(photosURL)
     fetch(photosURL)
         .then(response => {
           return response.json();
