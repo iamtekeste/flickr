@@ -1,0 +1,23 @@
+.paginations {
+    float: right;
+}
+
+button {
+    height: 25px;
+    display: inline-block;
+    width: 100px;
+    margin-right: 10px;
+    background: #222;
+    color: #fff;
+    border: 0px;
+    cursor: pointer
+}
+button:focus {
+    outline: none;
+}
+@media all and (max-width: 500px) {
+    .paginations{
+        float: none;
+        margin-bottom: 10px;
+    }
+}
