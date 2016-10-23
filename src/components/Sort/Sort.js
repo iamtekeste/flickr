@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './Sort.css';
 class Sort extends Component {
     constructor() {
         super();
@@ -11,8 +11,9 @@ class Sort extends Component {
 
     render() {
         return (
-            <div>
+            <div className="sort">
                 <select  onChange={this.handleSort} ref="sort">
+                    <option value="">Sort by</option>
                     <option value="date-posted-desc">Date posted - Desc</option>
                     <option value="date-posted-asc">Date posted - Asc</option>
                     <option value="relevance">Relevance</option>
