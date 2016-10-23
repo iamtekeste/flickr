@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import './Search.css'
 import _ from 'underscore';
+import ReactDOM from 'react-dom';
 
 class Search extends Component {
     constructor() {
@@ -9,6 +11,9 @@ class Search extends Component {
         this.handleChange = _.debounce(this.handleChange, 500);
  
     }
+    componentDidMount() {
+         ReactDOM.findDOMNode(this.refs.search).focus(); 
+    }
     handleChange() {
         this.props.handleSearch(this.refs.search.value);
     }
@@ -16,7 +21,7 @@ class Search extends Component {
     render() {
         return (
             <div>
-                <input type="text" ref="search" placeholder="search" onChange={this.handleChange}/>
+                <input type="text" ref="search" placeholder="Search Photos" onChange={this.handleChange}/>
             </div>
         );
     }
