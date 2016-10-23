@@ -1,12 +1,9 @@
-/*.thumbnail {
-    display: inline-block;
-    max-width: 640px;
+main {
+    position: relative;
 }
-.thumbnail img {
-    max-width: 100%;
-    height: auto;
-} */
-
+.stage-container {
+  display: none;
+}
 .photos {
    line-height: 0;
    
